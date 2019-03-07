@@ -540,13 +540,6 @@
       (incf node-counter)
        symbol))
 
-;
-;(defun make-node ()
-;    (let ((symbol (make-symbol (concat "n" (number-to-string node-counter)))))
-;      (set symbol node-counter)
-;      (incf node-counter)
-;      symbol))
-
 #+END_SRC
 
 #+BEGIN_SRC elisp
