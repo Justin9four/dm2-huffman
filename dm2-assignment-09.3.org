@@ -525,7 +525,6 @@
 #+BEGIN_SRC elisp :results silent
   (defun make-node-list-from-table (ft)
     "Given a frequency table create nodes and store in a list"
-    (setq node-counter 0)
     (loop for key being the hash-keys of ft 
           using (hash-value value)
               collect (make-node1 key value)))
