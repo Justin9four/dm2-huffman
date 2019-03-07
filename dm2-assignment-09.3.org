@@ -530,15 +530,22 @@
               collect (make-node1 key value)))
 
    (setq node-counter 0)
-   (defun make-node1 (key value)
+   (defun make-node (gap-size frequency)
       (let ((symbol (make-symbol (format "n%d" node-counter))))
-      (set symbol node-counter)
-      (set-value symbol value)
-      (put symbol :gap-length key)
-      (put symbol :frequency value) 
+      (set-value symbol frequency)
+      (put symbol :gap gap-size)
+      (put symbol :code "") 
       (incf node-counter)
        symbol))
 
+   (defun make-node-intern-version (gap-size frequency)
+      (let ((symbol (intern (format "n%d" node-counter))))
+      (setf (symbol-plist symbol) nil)
+      (set symbol frequency)
+      (put symbol :gap gap-size)
+      (put symbol :code "") 
+      (incf node-counter)
+       symbol))
 #+END_SRC
 
 #+BEGIN_SRC elisp
