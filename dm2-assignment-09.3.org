@@ -503,7 +503,7 @@
 ---> Here is the actual Function make-node-list-from-table
 #+BEGIN_SRC elisp :results silent
   (defun make-node-list-from-table (ft)
-    ""
+    "Given a frequency table create nodes and store in a list"
     (setq node-counter 0)
     (loop for key being the hash-keys of ft 
           using (hash-value value)
@@ -517,8 +517,35 @@
                     (put new-node :frequency v)
                     new-node
                     )
-          )
+           
     )
+#+END_SRC
+
+---> new and improved make-node with changed make-node-list-from-table function
+#+BEGIN_SRC elisp :results silent
+  (defun make-node-list-from-table (ft)
+    "Given a frequency table create nodes and store in a list"
+    (setq node-counter 0)
+    (loop for key being the hash-keys of ft 
+          using (hash-value value)
+              collect (make-node1 key value)))
+
+   (setq node-counter 0)
+   (defun make-node1 (key value)
+      (let ((symbol (make-symbol (format "n%d" node-counter))))
+      (set symbol node-counter)
+      (set-value symbol value)
+      (put symbol :gap-length key)
+      (put symbol :frequency value) 
+      (incf node-counter)
+       symbol))
+
+;
+;(defun make-node ()
+;    (let ((symbol (make-symbol (concat "n" (number-to-string node-counter)))))
+;      (set symbol node-counter)
+;      (incf node-counter)
+;      symbol))
 
 #+END_SRC
 
