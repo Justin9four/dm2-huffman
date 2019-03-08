@@ -522,12 +522,13 @@
 #+END_SRC
 
 ---> new and improved make-node with changed make-node-list-from-table function
+---> the old one can be removed
 #+BEGIN_SRC elisp :results silent
   (defun make-node-list-from-table (ft)
     "Given a frequency table create nodes and store in a list"
     (loop for key being the hash-keys of ft 
           using (hash-value value)
-              collect (make-node1 key value)))
+              collect (make-node key value)))
 
    (setq node-counter 0)
    (defun make-node (gap-size frequency)
